@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: data  
+  name: minio-creds-secret
+type: Opaque
+stringData:
+  ## Access Key for MinIO Tenant, base64 encoded (echo -n 'minio' | base64)
+  accesskey: bWluaW8=
+  ## Secret Key for MinIO Tenant, base64 encoded (echo -n 'minio123' | base64)
+  secretkey: bWluaW8xMjM=
+---
+apiVersion: minio.min.io/v1
+kind: Tenant
+metadata:
+  name: minio
+  namespace: data
+spec:
+  metadata:
+    annotations:
+      prometheus.io/path: /minio/prometheus/metrics
+      prometheus.io/port: "9000"
+      prometheus.io/scrape: "true"
+  image: minio/minio:RELEASE.2020-08-18T19-41-00Z
+  serviceName: minio-internal-service
+  zones:
+    - name: "zone-0"
+      servers: 1
+      volumesPerServer: 4
+      volumeClaimTemplate:
+        metadata:
+          name: miniodata
+        spec:
+          storageClassName: local-storage
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+  ## Secret with credentials to be used by MinIO instance.
+  credsSecret:
+    name: minio-creds-secret
+  podManagementPolicy: Parallel
+  requestAutoCert: false
+  certConfig:
+    commonName: ""
+    organizationName: []
+    dnsNames: []
+  liveness:
+    initialDelaySeconds: 10
+    periodSeconds: 1
+    timeoutSeconds: 1
