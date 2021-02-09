@@ -1,4 +1,6 @@
-## k8s-based Data-Driven Analytics/Data Science(ML/DeepML) SaaS Platform for Data Analyst/Data Engineer/Data Scientist/DataOps/MLOps playground (MVP/POC/environmints)
+## UAP (Universal Analytics Platform: k8s-based)
+
+### Objectives: k8s-based Data-Driven Analytics/Data Science(ML/DeepML) PaaS/SaaS Platform for Data Analyst/Data Engineer/Data Scientist/DataOps/MLOps playground (MVP/POC/environmints)
 
 ### Used stacks and products:
 
