@@ -16,7 +16,7 @@ Note: For building Analytics/ML SaaS platform we can also use cloud-native SaaSs
 ### PaaS/SaaS MVP/POC/Development environments used:
 
 - k8s (k8s-local: k3s, minikube, kubespray) `Note: Default development environment: k3s` 
-- k8s AWS (KOPS for k8s clusters deploy on AWS, and k8s Operators/Helm Charts/YAML manifests for creating k8s deployments (PaaS&SaaS services).  
+- k8s AWS (KOPS for k8s clusters deploy on AWS, and k8s Operators/Helm Charts/YAML manifests for creating k8s deployments (PaaS/SaaS services).  
 
 ### PaaS/SaaS objectives:
 
@@ -26,7 +26,7 @@ Software as a Service (SaaS) will be "on-demand software", accessed/used by end 
 
 ### Productionalize PaaS/SaaS: k8s (KOPS, Rancher, managed k8s)
 
-k8s-based data-driven Analytics/ML/DeepML SaaS platform provisioning/deploy : KOPS for k8s provisioning on AWS(default); Rancher (custom provisioning): k3s(for branches development)/RKE(for on-prem k8s) and Rancher(for the public clouds) with AWS EKS/Azure AKS/Google GKE; managed k8s on AWS/Azure/GCP/OCP/etc. k8s Operators/Helm Charts/YAML manifests for creating k8s deployments (SaaS services).
+k8s-based data-driven Analytics/ML/DeepML SaaS platform provisioning/deploy : KOPS for k8s provisioning on AWS(default); Rancher (custom provisioning): k3s(for branches development)/RKE(for on-prem k8s) and Rancher(for the public clouds) with AWS EKS/Azure AKS/Google GKE; managed k8s on AWS/Azure/GCP/OCP/etc. k8s Operators/Helm Charts/YAML manifests for creating k8s deployments (PaaS/SaaS services).
 
 
 
