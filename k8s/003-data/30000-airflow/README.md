@@ -4,13 +4,13 @@ This is a everything you need to deploy Airflow on k3s for development (DAGs: Di
 
 Image names are: davarski/airflow-base and davarski/airflow-dag.
 
-Airflow UI password can be found in helm/files/secrets/airflow/AFPW
+Airflow UI password can be configured/found in helm/files/secrets/airflow/AFPW
 
 ## Set up everyhting by hand
 
 ### Build docker images
 
-In this Project, we work with 2 Docker Images that we call Base and Dag. The base image is used to contain Airflow itself without the Airflow DAGs, and the Dag is used for only containing the Airflow DAGs. They are separated, because the Dag image gets built a lot more during a project, so we save building time this way but not having them in the same image. We also use virtualenv for further separation of the dependencies between the two.
+In this project/example, we work with 2 Docker Images that we call Base and Dag. The base image is used to contain Airflow itself without the Airflow DAGs, and the Dag is used for only containing the Airflow DAGs. They are separated, because the Dag image gets built a lot more during a project, so we save building time this way but not having them in the same image. We also use virtualenv for further separation of the dependencies between the two.
 
 Go to the docker/base and build the base img after that go to docker/dag and build the dag image
 
