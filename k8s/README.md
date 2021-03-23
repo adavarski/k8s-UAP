@@ -1,6 +1,6 @@
 # k8s Local & AWS data-science development environment
 
-- AWS (build k8s cluster with KOPS)
+- AWS (build k8s cluster with [KOPS](https://github.com/adavarski/k8s-UAP/tree/main/production-k8s/aws-k8s/KOPS))
 
 KOPS is based on Terraform and is working very well for AWS k8s deployments. After AWS k8s cluster has been deployed, you can use [003-data/](https://github.com/adavarski/PaaS-and-SaaS-POC/tree/main/saas/k8s/003-data) as base or Helm Charts or k8s Operators for PaaS/SaaS services deployment @ k8s cluster (create Helm Charts: Consul cluster, Kafka cluster, Elasticsearch cluster, etc. based on stable Helm charts for all needed SaaS services: Kafka, ELK, Postgres, Consul, Grafana, Sensu, InfluxDB, etc., etc. →  Ref:https://artifacthub.io/; https://github.com/artifacthub/hub https://github.com/helm/charts (obsolete) ; etc. Better is to create k8s Operators for all needed PaaS/SaaS services (ref: https://github.com/adavarski/k8s-operators-playground) than Helm Charts, based on https://github.com/operator-framework/community-operators. There are many k8s Operators @ https://operatorhub.io/ for example https://operatorhub.io/operator/postgres-operator, https://operatorhub.io/operator/elastic-cloud-eck, https://operatorhub.io/operator/banzaicloud-kafka-operator, etc. so create own based on them. 
 
