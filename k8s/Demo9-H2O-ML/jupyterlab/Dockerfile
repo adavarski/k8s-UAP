@@ -37,7 +37,8 @@ RUN pip install --no-cache \
     fastai \
     octave_kernel \
     jupyterlab-git
-    
+
+# H2O
 RUN pip install requests \
 && pip install tabulate \
 && pip install "colorama>=0.3.8" \
