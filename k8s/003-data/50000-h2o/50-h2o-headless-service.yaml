@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: h2o-service
+  namespace: default
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: h2o
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 54321
