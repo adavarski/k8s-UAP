@@ -4,7 +4,7 @@ Build custom JupyterLab docker image and pushing it into DockerHub container reg
 ```
 $ cd ./jupyterlab
 $ docker build -t jupyterlab-h2o .
-$ docker tag jupyterlab-eth:latest davarski/jupyterlab-h2o:latest
+$ docker tag jupyterlab-h2o:latest davarski/jupyterlab-h2o:latest
 $ docker login 
 $ docker push davarski/jupyterlab-h2o:latest
 
@@ -51,21 +51,3 @@ kubectl apply -f ./003-data//50000-h2o/60-h2o-ingress.yaml
 
 Example H2O AutoML jupyter notebook: https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/h2o-automl.ipynb (based on: https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/Coursera-examples/h2o-AutoML-example.ipynb)
 
-Notebook (H2O cells) :
-```
-
-pip install requests 
-pip install tabulate 
-pip install "colorama>=0.3.8" 
-pip install future 
-pip install -f http://h2o-release.s3.amazonaws.com/h2o/latest_stable_Py.html h2o
-```
-
-Dockerfile: 
-```
-RUN pip install requests \
-&& pip install tabulate \
-&& pip install "colorama>=0.3.8" \
-&& pip install future \
-&& pip install -f http://h2o-release.s3.amazonaws.com/h2o/latest_stable_Py.html h2o
-```
