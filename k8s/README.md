@@ -1315,6 +1315,8 @@ the new c2 hybrid cluster is ready for use.
 
 ## Demo8: [ML/DeepML for Cybersecurity ](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo8-ML-Cybersecurity)
 
+## Demo9: [ML/DeepML with H2O](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo9-H2O-ML)
+
 ## Clean environment
 
 ```
