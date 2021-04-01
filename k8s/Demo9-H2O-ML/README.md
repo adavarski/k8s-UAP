@@ -49,7 +49,9 @@ Browse to http://jupyter.data.davar.com/lab
 
 Note: Jupyter Notebooks are a browser-based (or web-based) IDE (integrated development environments)
 
-Example H2O AutoML jupyter notebook: https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/h2o-automl.ipynb (https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/Coursera-examples/h2o-AutoML-example.ipynb)
+### Example H2O AutoML jupyter notebooks:
+
+- AutoML example https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/h2o-automl.ipynb (https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/Coursera-examples/h2o-AutoML-example.ipynb)
 
 
-[Coursera-examples](https://github.com/adavarski/h2o-jupyter-docker/tree/main/notebooks)
+- [Coursera-examples](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo9-H2O-ML/notebooks/Coursera-examples)
