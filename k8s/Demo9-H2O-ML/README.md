@@ -49,7 +49,7 @@ kubectl apply -f ./k8s/k8s-h2o/50-h2o-headless-service.yaml
 kubectl apply -f ./k8s/k8s-h2o/60-h2o-ingress.yaml
 ```
 
-Example H2O AutoML jupyter notebook: https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/h2o-automl.ipynb (based on: https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/Coursera-examples/h2o-AutoML-example.ipynb)
+Example H2O AutoML jupyter notebook: https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/h2o-automl.ipynb (https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/Coursera-examples/h2o-AutoML-example.ipynb)
 
 
 [Coursera-examples](https://github.com/adavarski/h2o-jupyter-docker/tree/main/notebooks)
