@@ -1,3 +1,11 @@
+
+### Deploy H2O cluster
+```
+kubectl apply -f ../003-data/50000-h2o/40-h2o-statefulset.yaml
+kubectl apply -f ../003-data/50000-h2o/50-h2o-headless-service.yaml
+kubectl apply -f ../003-data/50000-h2o/60-h2o-ingress.yaml
+```
+
 ### Jupyter environment
 
 Build custom JupyterLab docker image and pushing it into DockerHub container registry.
@@ -40,14 +48,6 @@ $ kubectl logs jupyter-notebook
 Browse to http://jupyter.data.davar.com/lab 
 
 Note: Jupyter Notebooks are a browser-based (or web-based) IDE (integrated development environments)
-
-
-### Deploy H2O cluster
-```
-kubectl apply -f ../003-data/50000-h2o/40-h2o-statefulset.yaml
-kubectl apply -f ../003-data/50000-h2o/50-h2o-headless-service.yaml
-kubectl apply -f ../003-data/50000-h2o/60-h2o-ingress.yaml
-```
 
 Example H2O AutoML jupyter notebook: https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/h2o-automl.ipynb (https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/Coursera-examples/h2o-AutoML-example.ipynb)
 
