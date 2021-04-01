@@ -51,7 +51,7 @@ Note: Jupyter Notebooks are a browser-based (or web-based) IDE (integrated devel
 
 ### Example H2O AutoML jupyter notebooks:
 
-- AutoML example https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/h2o-automl.ipynb (https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/Coursera-examples/h2o-AutoML-example.ipynb)
+- AutoML example: https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/h2o-automl.ipynb (https://github.com/adavarski/k8s-UAP/blob/main/k8s/Demo9-H2O-ML/notebooks/Coursera-examples/h2o-AutoML-example.ipynb)
 
 
 - [Coursera-examples](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo9-H2O-ML/notebooks/Coursera-examples)
