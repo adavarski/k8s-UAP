@@ -1418,3 +1418,7 @@ Note4.It's beter to use k8s Operators (ref: https://github.com/adavarski/k8s-ope
 Ref1:  https://github.com/adavarski/RKE-rancher-kvm (Rancher2 RKE+ KVM + CentOS)
 
 Ref2:  https://github.com/adavarski/rancher2-vagrant-alpine (Rancher2 RKE + Vagrant:VBox + Alpine)
+
+# OpenShift
+
+Ref: https://github.com/adavarski/OpenShift4-CRC-ubuntu
