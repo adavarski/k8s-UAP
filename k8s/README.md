@@ -1299,6 +1299,8 @@ kilo-k3s.yaml
 the new c2 hybrid cluster is ready for use.
 ```
 
+# Playgrounds/Demos
+
 ## Demo1: [DataProcessing: Serverless:OpenFaaS+ETL:Apache Nifi](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo1-DataProcessing-Serverless-ETL/)
 
 ## Demo2: [DataProcessing-MinIO](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo2-DataProcessing-MinIO/)
