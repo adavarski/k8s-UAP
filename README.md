@@ -30,8 +30,8 @@ k8s-based data-driven Analytics/ML/DeepML SaaS platform provisioning/deploy : KO
 
 ### Playground:
 
-- [DataProcessing: Serverless:OpenFaaS+ETL:Apache Nifi](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo1-DataProcessing-Serverless-ETL/)
-- [DataProcessing-MinIO](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo2-DataProcessing-MinIO/)
+- Demo1: [DataProcessing: Serverless:OpenFaaS+ETL:Apache Nifi](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo1-DataProcessing-Serverless-ETL/)
+- Demo2: [DataProcessing-MinIO](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo2-DataProcessing-MinIO/)
 #### Demo3: [AutoML:MLFlow+Seldon Core](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo3-AutoML-MLFlow-SeldonCore/)
 #### Demo4: [DeepML with TensorFlow 2.0](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo4-DeepML-TensorFlow)
 #### Demo5: [BigData:MinIO Data Lake with Hive/Presto SQL-Engines](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo5-BigData-MinIO-Hive-Presto)
