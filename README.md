@@ -28,7 +28,17 @@ Software as a Service (SaaS) will be "on-demand software", accessed/used by end 
 
 k8s-based data-driven Analytics/ML/DeepML SaaS platform provisioning/deploy : KOPS for k8s provisioning on AWS(default); Rancher (custom provisioning): k3s(for branches development)/RKE(for on-prem k8s) and Rancher(for the public clouds) with AWS EKS/Azure AKS/Google GKE; managed k8s on AWS/Azure/GCP/OCP/etc. k8s Operators/Helm Charts/YAML manifests for creating k8s deployments (PaaS/SaaS services).
 
+### Playground:
 
+#### Demo1: [DataProcessing: Serverless:OpenFaaS+ETL:Apache Nifi](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo1-DataProcessing-Serverless-ETL/)
+#### Demo2: [DataProcessing-MinIO](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo2-DataProcessing-MinIO/)
+#### Demo3: [AutoML:MLFlow+Seldon Core](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo3-AutoML-MLFlow-SeldonCore/)
+#### Demo4: [DeepML with TensorFlow 2.0](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo4-DeepML-TensorFlow)
+#### Demo5: [BigData:MinIO Data Lake with Hive/Presto SQL-Engines](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo5-BigData-MinIO-Hive-Presto)
+#### Demo6: [Spark with MinIO(S3) and Delta Lake for large-scale big data processing and ML](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo6-Spark-ML)
+#### Demo7: [SaaS deploy with IAM:Keycloak + JupyterHUB/JupyterLAB](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo7-SaaS)
+#### Demo8: [ML/DeepML for Cybersecurity ](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo8-ML-Cybersecurity)
+#### Demo9: [ML/DeepML with H2O](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo9-H2O-ML)
 
 
 
