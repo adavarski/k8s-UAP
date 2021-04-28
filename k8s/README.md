@@ -1299,26 +1299,6 @@ kilo-k3s.yaml
 the new c2 hybrid cluster is ready for use.
 ```
 
-# Playgrounds/Demos
-
-## Demo1: [DataProcessing: Serverless:OpenFaaS+ETL:Apache Nifi](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo1-DataProcessing-Serverless-ETL/)
-
-## Demo2: [DataProcessing-MinIO](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo2-DataProcessing-MinIO/)
-
-## Demo3: [AutoML:MLFlow+Seldon Core](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo3-AutoML-MLFlow-SeldonCore/)
-
-## Demo4: [DeepML with TensorFlow 2.0](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo4-DeepML-TensorFlow)
-
-## Demo5: [BigData:MinIO Data Lake with Hive/Presto SQL-Engines](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo5-BigData-MinIO-Hive-Presto)
-
-## Demo6: [Spark with MinIO(S3) and Delta Lake for large-scale big data processing and ML](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo6-Spark-ML)
-
-## Demo7: [SaaS deploy with IAM:Keycloak + JupyterHUB/JupyterLAB](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo7-SaaS)
-
-## Demo8: [ML/DeepML for Cybersecurity ](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo8-ML-Cybersecurity)
-
-## Demo9: [ML/DeepML with H2O](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo9-H2O-ML)
-
 ## Clean environment
 
 ```
@@ -1326,9 +1306,9 @@ kubectl delete -f ./003-data/000-namespace/00-namespace.yml
 ```
 Note: all resources/objects into data namespace will be auto-removed by k8s.
 
+# Kubernetes local development environment k3s alternatives
 
-
-# minikube:
+## minikube:
 ```
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && mv ./minikube /usr/local/bin/
 minikube start --cpus 2 --memory 6150 --insecure-registry="docker.infra.example.com"
@@ -1336,7 +1316,7 @@ minikube start --cpus 2 --memory 6150 --insecure-registry="docker.infra.example.
 ```
 Deploy in-Cluster GitLab for K8s Development HOWTO (Developing for Kubernetes with minikube+GitLab): https://github.com/adavarski/minikube-gitlab-development
 
-# kubespray (HA: 2 masters)
+## kubespray (HA: 2 masters)
 ```
 $ git clone https://github.com/kubernetes-sigs/kubespray
 $ sudo yum install python-pip; sudo pip install --upgrade pip; 
@@ -1415,12 +1395,35 @@ https://github.com/phiroict/terraform-aws-kafka-cluster; https://github.com/dwmk
 
 Note4.It's beter to use k8s Operators (ref: https://github.com/adavarski/k8s-operators-playground) than Helm Charts
 ```
-# Rancher
+## Rancher
 
 Ref1:  https://github.com/adavarski/RKE-rancher-kvm (Rancher2 RKE+ KVM + CentOS)
 
 Ref2:  https://github.com/adavarski/rancher2-vagrant-alpine (Rancher2 RKE + Vagrant:VBox + Alpine)
 
-# OpenShift
+## OpenShift
 
 Ref: https://github.com/adavarski/OpenShift4-CRC-ubuntu
+
+
+# Playgrounds/Demos
+
+## Demo1: [DataProcessing: Serverless:OpenFaaS+ETL:Apache Nifi](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo1-DataProcessing-Serverless-ETL/)
+
+## Demo2: [DataProcessing-MinIO](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo2-DataProcessing-MinIO/)
+
+## Demo3: [AutoML:MLFlow+Seldon Core](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo3-AutoML-MLFlow-SeldonCore/)
+
+## Demo4: [DeepML with TensorFlow 2.0](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo4-DeepML-TensorFlow)
+
+## Demo5: [BigData:MinIO Data Lake with Hive/Presto SQL-Engines](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo5-BigData-MinIO-Hive-Presto)
+
+## Demo6: [Spark with MinIO(S3) and Delta Lake for large-scale big data processing and ML](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo6-Spark-ML)
+
+## Demo7: [SaaS deploy with IAM:Keycloak + JupyterHUB/JupyterLAB](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo7-SaaS)
+
+## Demo8: [ML/DeepML for Cybersecurity ](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo8-ML-Cybersecurity)
+
+## Demo9: [ML/DeepML with H2O](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo9-H2O-ML)
+
+
