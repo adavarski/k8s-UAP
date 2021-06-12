@@ -1132,7 +1132,7 @@ Fix k3s CoreDNS for local development to use local DNS server if needed.
 
 ```
 
-# Install Ubuntu 18.04 on some bare-metal server/workstation with an NVIDIA GeForce GPU (for example Gaming NVIDIA GeForce 1070 GPU)   .
+# Install Ubuntu (18+) on some bare-metal server/workstation with an NVIDIA GeForce GPU (for example Gaming NVIDIA GeForce 1070 GPU)   .
 $ sudo su
 $ apt update && apt upgrade -y
 $ apt install -y apt-transport-https \
