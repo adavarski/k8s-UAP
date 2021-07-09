@@ -16,7 +16,7 @@ Note: For building Analytics/ML SaaS platform we can also use cloud-native SaaSs
 ### PaaS/SaaS MVP/POC/Development environments used:
 
 - k8s: local (k3s, minikube, kubespray). Note: Default development environment: [k3s](https://github.com/adavarski/k8s-UAP/tree/main/k8s) 
-- k8s: AWS. Note: [KOPS](https://github.com/adavarski/k8s-UAP/tree/main/production-k8s/aws-k8s/KOPS) for k8s clusters deploy on AWS, and k8s Operators/Helm Charts/YAML manifests for creating k8s deployments (PaaS/SaaS services).  
+- k8s: AWS. Default production using [KOPS](https://github.com/adavarski/k8s-UAP/tree/main/production-k8s/aws-k8s/KOPS) for k8s clusters deploy on AWS, and k8s Operators/Helm Charts/YAML manifests for creating k8s deployments (PaaS/SaaS services). Or using managed k8s on different cloud providers + terraform to create a k8s cluster: AWS:[EKS](https://github.com/adavarski/k8s-UAP/tree/main/production-k8s/aws-k8s/EKS), GCP:[GKE](https://github.com/adavarski/k8s-UAP/tree/main/production-k8s/gcp-k8s/GKE) Azure:[AKS](https://github.com/adavarski/k8s-UAP/tree/main/production-k8s/azure-k8s/AKS), OCI:[OKE](https://github.com/adavarski/k8s-UAP/tree/main/production-k8s/oci-k8s/OKE), DiritalOcean:[DOKS](https://github.com/adavarski/k8s-UAP/tree/main/production-k8s/digitalocean-k8s/DOKS)
 
 ### PaaS/SaaS objectives:
 
