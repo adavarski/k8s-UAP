@@ -4,6 +4,15 @@ This repository showcases using Terraform to provision a new VPC and Elastic Kub
 
 By default, this will create a highly available cluster using public and private subnets, a best practise for production environments.
 
+## Install awscli
+
+Install/configure awscli:
+
+apt install -y python3-pip
+pip3 install awscli
+aws configure (or export AWS_ACCESS_KEY_ID= ; export AWS_SECRET_ACCESS_KEY=; export AWS_DEFAULT_REGION=us-east-1)
+
+
 ## Setup variables
 
 In `terraform.tfvars` set the variables you'd like.
