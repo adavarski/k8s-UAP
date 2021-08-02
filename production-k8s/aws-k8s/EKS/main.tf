@@ -1,6 +1,9 @@
 provider "aws" {
   version = "~> 3.0"
   region  = var.region
+  access_key = ""
+  secret_key = ""
+
 }
 
 data "aws_availability_zones" "available" {
