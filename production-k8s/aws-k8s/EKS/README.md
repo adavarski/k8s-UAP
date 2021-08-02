@@ -7,13 +7,19 @@ By default, this will create a highly available cluster using public and private
 ## Install awscli
 
 Install/configure awscli:
-
+```
 apt install -y python3-pip
 pip3 install awscli
-aws configure (or export AWS_ACCESS_KEY_ID= ; export AWS_SECRET_ACCESS_KEY=; export AWS_DEFAULT_REGION=us-east-1)
+aws configure (or export AWS_ACCESS_KEY_ID= ; export AWS_SECRET_ACCESS_KEY=; export AWS_DEFAULT_REGION=ap-southeast-2)
+```
 
 
 ## Setup variables
+
+In `main.tf` set your AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY
+
+  `access_key = ""`
+  `secret_key = ""`
 
 In `terraform.tfvars` set the variables you'd like.
 
