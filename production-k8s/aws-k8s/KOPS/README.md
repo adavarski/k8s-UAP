@@ -48,7 +48,6 @@ aws_access_key_id =
 aws_secret_access_key = 
 
 $ cat ~/.aws/config 
-cat: cat: No such file or directory
 [default]
 region = us-east-2
 [k8s-saas]
