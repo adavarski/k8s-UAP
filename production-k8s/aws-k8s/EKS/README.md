@@ -47,6 +47,8 @@ terraform apply
 
 ## Configure kubectl
 
+Ref: See [this guide on setting up authentication](https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html).
+
 Pre: Install aws-iam-authenticator
 ```
 curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/aws-iam-authenticator
@@ -54,8 +56,6 @@ chmod +x ./aws-iam-authenticator
 sudo cp ./aws-iam-authenticator /usr/local/bin
 aws-iam-authenticator help
 ```
-
-See [this guide on setting up authentication](https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html).
 
 Example:
 ```
