@@ -324,6 +324,120 @@ kube-system   deployment.apps/coredns   2/2     2            2           59m
 NAMESPACE     NAME                                 DESIRED   CURRENT   READY   AGE
 kube-system   replicaset.apps/coredns-6bfbc5f9f8   2         2         2       59m
 ```
+## Set up NGINX with sample traffic on Amazon EKS and Kubernetes
+
+Ref: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-Sample-Workloads-nginx.html
+
+```
+$ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+"ingress-nginx" has been added to your repositories
+$ kubectl create namespace nginx-ingress-sample
+namespace/nginx-ingress-sample created
+$ helm install my-nginx ingress-nginx/ingress-nginx \
+> --namespace nginx-ingress-sample \
+> --set controller.metrics.enabled=true \
+> --set-string controller.metrics.service.annotations."prometheus\.io/port"="10254" \
+> --set-string controller.metrics.service.annotations."prometheus\.io/scrape"="true"
+
+NAME: my-nginx
+LAST DEPLOYED: Mon Aug  2 19:40:23 2021
+NAMESPACE: nginx-ingress-sample
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+The ingress-nginx controller has been installed.
+It may take a few minutes for the LoadBalancer IP to be available.
+You can watch the status by running 'kubectl --namespace nginx-ingress-sample get services -o wide -w my-nginx-ingress-nginx-controller'
+
+An example Ingress that makes use of the controller:
+
+  apiVersion: networking.k8s.io/v1beta1
+  kind: Ingress
+  metadata:
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    name: example
+    namespace: foo
+  spec:
+    rules:
+      - host: www.example.com
+        http:
+          paths:
+            - backend:
+                serviceName: exampleService
+                servicePort: 80
+              path: /
+    # This section is only required if TLS is to be enabled for the Ingress
+    tls:
+        - hosts:
+            - www.example.com
+          secretName: example-tls
+
+If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
+
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: example-tls
+    namespace: foo
+  data:
+    tls.crt: <base64 encoded cert>
+    tls.key: <base64 encoded key>
+  type: kubernetes.io/tls
+$ kubectl get service -n nginx-ingress-sample
+NAME                                          TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    PORT(S)                      AGE
+my-nginx-ingress-nginx-controller             LoadBalancer   172.20.63.173    a4448c89057b1427692283001c049ace-1867031002.ap-southeast-2.elb.amazonaws.com   80:31358/TCP,443:30772/TCP   77s
+my-nginx-ingress-nginx-controller-admission   ClusterIP      172.20.102.134   <none>                                                                         443/TCP                      77s
+my-nginx-ingress-nginx-controller-metrics     ClusterIP      172.20.63.175    <none>                                                                         10254/TCP                    77s
+
+$ EXTERNAL_IP=a4448c89057b1427692283001c049ace-1867031002.ap-southeast-2.elb.amazonaws.com
+$ SAMPLE_TRAFFIC_NAMESPACE=nginx-sample-traffic
+$ curl https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/master/k8s-deployment-manifest-templates/deployment-mode/service/cwagent-prometheus/sample_traffic/nginx-traffic/nginx-traffic-sample.yaml | 
+> sed "s/{{external_ip}}/$EXTERNAL_IP/g" | 
+> sed "s/{{namespace}}/$SAMPLE_TRAFFIC_NAMESPACE/g" | 
+> kubectl apply -f -
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2088  100  2088    0     0   6713      0 --:--:-- --:--:-- --:--:--  6692
+namespace/nginx-sample-traffic created
+pod/banana-app created
+service/banana-service created
+pod/apple-app created
+service/apple-service created
+Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+ingress.extensions/ingress-nginx-demo created
+pod/traffic-generator created
+
+$ kubectl get pod -n $SAMPLE_TRAFFIC_NAMESPACE
+NAME                READY   STATUS    RESTARTS   AGE
+apple-app           1/1     Running   0          29s
+banana-app          1/1     Running   0          32s
+traffic-generator   1/1     Running   0          26s
+
+
+$ kubectl get ing --all-namespaces
+NAMESPACE              NAME                 CLASS    HOSTS                                                                          ADDRESS                                                                        PORTS   AGE
+nginx-sample-traffic   ingress-nginx-demo   <none>   a4448c89057b1427692283001c049ace-1867031002.ap-southeast-2.elb.amazonaws.com   a4448c89057b1427692283001c049ace-1867031002.ap-southeast-2.elb.amazonaws.com   80      2m34s
+
+$ kubectl get ing -n $SAMPLE_TRAFFIC_NAMESPACE
+NAME                 CLASS    HOSTS                                                                          ADDRESS                                                                        PORTS   AGE
+ingress-nginx-demo   <none>   a4448c89057b1427692283001c049ace-1867031002.ap-southeast-2.elb.amazonaws.com   a4448c89057b1427692283001c049ace-1867031002.ap-southeast-2.elb.amazonaws.com   80      88s
+
+### Clean 
+$ kubectl delete namespace $SAMPLE_TRAFFIC_NAMESPACE
+namespace "nginx-sample-traffic" deleted
+$ helm list --all-namespaces
+NAME    	NAMESPACE           	REVISION	UPDATED                                 	STATUS  	CHART               	APP VERSION
+my-nginx	nginx-ingress-sample	1       	2021-08-02 19:40:23.481396231 +0300 EEST	deployed	ingress-nginx-3.34.0	0.47.0     
+$ helm uninstall my-nginx --namespace nginx-ingress-sample
+release "my-nginx" uninstalled
+$ kubectl delete namespace nginx-ingress-sample 
+namespace "nginx-ingress-sample" deleted
+
+---------
+```
+
 ## Tearing down
 
 ```shell
