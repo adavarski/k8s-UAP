@@ -17,10 +17,10 @@ aws configure (or export AWS_ACCESS_KEY_ID= ; export AWS_SECRET_ACCESS_KEY=; exp
 ## Setup variables
 
 In `main.tf` set your AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY
-
-  `access_key = ""`
-  `secret_key = ""`
-
+```
+  access_key = ""
+  secret_key = ""
+```
 In `terraform.tfvars` set the variables you'd like.
 
 `name` and `region` must be defined, everything else is optional.
