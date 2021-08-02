@@ -45,6 +45,192 @@ terraform plan
 terraform apply
 ```
 
+Example:
+```
+$ terraform apply
+...
+  Enter a value: yes
+
+aws_eip.nat[0]: Creating...
+aws_vpc.vpc: Creating...
+aws_iam_role.node: Creating...
+aws_eip.nat[1]: Creating...
+aws_iam_role.cluster: Creating...
+aws_iam_role.cluster: Creation complete after 2s [id=mycluster-cluster]
+aws_iam_role.node: Creation complete after 2s [id=mycluster-node]
+aws_iam_role_policy_attachment.AmazonEKSServicePolicy: Creating...
+aws_iam_role_policy_attachment.AmazonEKSClusterPolicy: Creating...
+aws_iam_role_policy_attachment.AmazonSSMManagedInstanceCore: Creating...
+aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly: Creating...
+aws_iam_role_policy.EKSClusterAutoscaler: Creating...
+aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy: Creating...
+aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy: Creating...
+aws_eip.nat[1]: Creation complete after 3s [id=eipalloc-01f1150f85c3c4410]
+aws_eip.nat[0]: Creation complete after 3s [id=eipalloc-0ad5493a3cc2cea37]
+aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly: Creation complete after 1s [id=mycluster-node-20210802150034509000000004]
+aws_iam_role_policy_attachment.AmazonEKSServicePolicy: Creation complete after 1s [id=mycluster-cluster-20210802150034505800000002]
+aws_iam_role_policy_attachment.AmazonSSMManagedInstanceCore: Creation complete after 1s [id=mycluster-node-20210802150034543300000006]
+aws_iam_role_policy_attachment.AmazonEKSClusterPolicy: Creation complete after 1s [id=mycluster-cluster-20210802150034502200000001]
+aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy: Creation complete after 1s [id=mycluster-node-20210802150034507800000003]
+aws_iam_role_policy.EKSClusterAutoscaler: Creation complete after 1s [id=mycluster-node:EKSClusterAutoscaler]
+aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy: Creation complete after 1s [id=mycluster-node-20210802150034541500000005]
+aws_vpc.vpc: Still creating... [10s elapsed]
+aws_vpc.vpc: Still creating... [20s elapsed]
+aws_vpc.vpc: Still creating... [30s elapsed]
+aws_vpc.vpc: Creation complete after 32s [id=vpc-04c9ab8f8bb7c22e3]
+aws_subnet.public[1]: Creating...
+aws_internet_gateway.igw: Creating...
+aws_subnet.private[1]: Creating...
+aws_subnet.public[0]: Creating...
+aws_subnet.private[0]: Creating...
+aws_subnet.private[0]: Creation complete after 7s [id=subnet-069e9af7fd8014abe]
+aws_subnet.private[1]: Creation complete after 7s [id=subnet-0126fb9d4cc8ad28b]
+aws_internet_gateway.igw: Still creating... [10s elapsed]
+aws_subnet.public[1]: Still creating... [10s elapsed]
+aws_subnet.public[0]: Still creating... [10s elapsed]
+aws_internet_gateway.igw: Creation complete after 11s [id=igw-0e7ac330db4105c75]
+aws_route_table.public: Creating...
+aws_subnet.public[1]: Still creating... [20s elapsed]
+aws_subnet.public[0]: Still creating... [20s elapsed]
+aws_route_table.public: Still creating... [10s elapsed]
+aws_subnet.public[1]: Creation complete after 21s [id=subnet-07b4f82f5cdc33751]
+aws_subnet.public[0]: Creation complete after 21s [id=subnet-01ee0eae18f927cc3]
+aws_nat_gateway.nat[0]: Creating...
+aws_nat_gateway.nat[1]: Creating...
+aws_eks_cluster.cluster: Creating...
+aws_route_table.public: Creation complete after 12s [id=rtb-04827e4f49d16a564]
+aws_route_table_association.public[0]: Creating...
+aws_route_table_association.public[1]: Creating...
+aws_route_table_association.public[1]: Creation complete after 5s [id=rtbassoc-0ba32e3e2d8bb18b9]
+aws_route_table_association.public[0]: Creation complete after 5s [id=rtbassoc-046f9b5891288e4f4]
+aws_nat_gateway.nat[0]: Still creating... [10s elapsed]
+aws_nat_gateway.nat[1]: Still creating... [10s elapsed]
+aws_eks_cluster.cluster: Still creating... [10s elapsed]
+aws_nat_gateway.nat[0]: Still creating... [20s elapsed]
+aws_nat_gateway.nat[1]: Still creating... [20s elapsed]
+aws_eks_cluster.cluster: Still creating... [20s elapsed]
+aws_nat_gateway.nat[0]: Still creating... [30s elapsed]
+aws_nat_gateway.nat[1]: Still creating... [30s elapsed]
+aws_eks_cluster.cluster: Still creating... [30s elapsed]
+aws_nat_gateway.nat[0]: Still creating... [40s elapsed]
+aws_nat_gateway.nat[1]: Still creating... [40s elapsed]
+aws_eks_cluster.cluster: Still creating... [40s elapsed]
+aws_nat_gateway.nat[0]: Still creating... [50s elapsed]
+aws_nat_gateway.nat[1]: Still creating... [50s elapsed]
+aws_eks_cluster.cluster: Still creating... [50s elapsed]
+aws_nat_gateway.nat[0]: Still creating... [1m0s elapsed]
+aws_nat_gateway.nat[1]: Still creating... [1m0s elapsed]
+aws_eks_cluster.cluster: Still creating... [1m0s elapsed]
+aws_nat_gateway.nat[0]: Still creating... [1m10s elapsed]
+aws_nat_gateway.nat[1]: Still creating... [1m10s elapsed]
+aws_eks_cluster.cluster: Still creating... [1m10s elapsed]
+aws_nat_gateway.nat[0]: Still creating... [1m20s elapsed]
+aws_nat_gateway.nat[1]: Still creating... [1m20s elapsed]
+aws_eks_cluster.cluster: Still creating... [1m20s elapsed]
+aws_nat_gateway.nat[0]: Still creating... [1m30s elapsed]
+aws_nat_gateway.nat[1]: Still creating... [1m30s elapsed]
+aws_eks_cluster.cluster: Still creating... [1m30s elapsed]
+aws_nat_gateway.nat[0]: Still creating... [1m40s elapsed]
+aws_nat_gateway.nat[1]: Still creating... [1m40s elapsed]
+aws_eks_cluster.cluster: Still creating... [1m40s elapsed]
+aws_nat_gateway.nat[1]: Creation complete after 1m50s [id=nat-0b4f7bc12cbeee77b]
+aws_nat_gateway.nat[0]: Still creating... [1m50s elapsed]
+aws_eks_cluster.cluster: Still creating... [1m50s elapsed]
+aws_nat_gateway.nat[0]: Still creating... [2m0s elapsed]
+aws_eks_cluster.cluster: Still creating... [2m0s elapsed]
+aws_nat_gateway.nat[0]: Creation complete after 2m1s [id=nat-04d768e678a115e74]
+aws_route_table.private[1]: Creating...
+aws_route_table.private[0]: Creating...
+aws_eks_cluster.cluster: Still creating... [2m10s elapsed]
+aws_route_table.private[0]: Still creating... [10s elapsed]
+aws_route_table.private[1]: Still creating... [10s elapsed]
+aws_route_table.private[1]: Creation complete after 12s [id=rtb-02e83a764101b153f]
+aws_route_table.private[0]: Creation complete after 14s [id=rtb-0c9b1a29a54cd57b8]
+aws_route_table_association.private[1]: Creating...
+aws_route_table_association.private[0]: Creating...
+aws_route_table_association.private[1]: Creation complete after 5s [id=rtbassoc-05ec5c6203b948a44]
+aws_route_table_association.private[0]: Creation complete after 5s [id=rtbassoc-0dd62b87e90670453]
+aws_eks_cluster.cluster: Still creating... [2m20s elapsed]
+aws_eks_cluster.cluster: Still creating... [2m30s elapsed]
+aws_eks_cluster.cluster: Still creating... [2m40s elapsed]
+aws_eks_cluster.cluster: Still creating... [2m50s elapsed]
+aws_eks_cluster.cluster: Still creating... [3m0s elapsed]
+aws_eks_cluster.cluster: Still creating... [3m10s elapsed]
+aws_eks_cluster.cluster: Still creating... [3m20s elapsed]
+aws_eks_cluster.cluster: Still creating... [3m30s elapsed]
+aws_eks_cluster.cluster: Still creating... [3m40s elapsed]
+aws_eks_cluster.cluster: Still creating... [3m50s elapsed]
+aws_eks_cluster.cluster: Still creating... [4m0s elapsed]
+aws_eks_cluster.cluster: Still creating... [4m10s elapsed]
+aws_eks_cluster.cluster: Still creating... [4m20s elapsed]
+aws_eks_cluster.cluster: Still creating... [4m30s elapsed]
+aws_eks_cluster.cluster: Still creating... [4m40s elapsed]
+aws_eks_cluster.cluster: Still creating... [4m50s elapsed]
+aws_eks_cluster.cluster: Still creating... [5m0s elapsed]
+aws_eks_cluster.cluster: Still creating... [5m10s elapsed]
+aws_eks_cluster.cluster: Still creating... [5m20s elapsed]
+aws_eks_cluster.cluster: Still creating... [5m30s elapsed]
+aws_eks_cluster.cluster: Still creating... [5m40s elapsed]
+aws_eks_cluster.cluster: Still creating... [5m50s elapsed]
+aws_eks_cluster.cluster: Still creating... [6m0s elapsed]
+aws_eks_cluster.cluster: Still creating... [6m10s elapsed]
+aws_eks_cluster.cluster: Still creating... [6m20s elapsed]
+aws_eks_cluster.cluster: Still creating... [6m30s elapsed]
+aws_eks_cluster.cluster: Still creating... [6m40s elapsed]
+aws_eks_cluster.cluster: Still creating... [6m50s elapsed]
+aws_eks_cluster.cluster: Still creating... [7m0s elapsed]
+aws_eks_cluster.cluster: Still creating... [7m10s elapsed]
+aws_eks_cluster.cluster: Still creating... [7m20s elapsed]
+aws_eks_cluster.cluster: Still creating... [7m30s elapsed]
+aws_eks_cluster.cluster: Still creating... [7m40s elapsed]
+aws_eks_cluster.cluster: Still creating... [7m50s elapsed]
+aws_eks_cluster.cluster: Still creating... [8m0s elapsed]
+aws_eks_cluster.cluster: Still creating... [8m10s elapsed]
+aws_eks_cluster.cluster: Still creating... [8m20s elapsed]
+aws_eks_cluster.cluster: Still creating... [8m30s elapsed]
+aws_eks_cluster.cluster: Still creating... [8m40s elapsed]
+aws_eks_cluster.cluster: Still creating... [8m50s elapsed]
+aws_eks_cluster.cluster: Still creating... [9m0s elapsed]
+aws_eks_cluster.cluster: Still creating... [9m10s elapsed]
+aws_eks_cluster.cluster: Still creating... [9m20s elapsed]
+aws_eks_cluster.cluster: Still creating... [9m30s elapsed]
+aws_eks_cluster.cluster: Still creating... [9m40s elapsed]
+aws_eks_cluster.cluster: Still creating... [9m50s elapsed]
+aws_eks_cluster.cluster: Still creating... [10m0s elapsed]
+aws_eks_cluster.cluster: Still creating... [10m10s elapsed]
+aws_eks_cluster.cluster: Still creating... [10m20s elapsed]
+aws_eks_cluster.cluster: Still creating... [10m30s elapsed]
+aws_eks_cluster.cluster: Still creating... [10m40s elapsed]
+aws_eks_cluster.cluster: Still creating... [10m50s elapsed]
+aws_eks_cluster.cluster: Creation complete after 10m52s [id=mycluster]
+aws_eks_node_group.nodegroup[0]: Creating...
+aws_eks_node_group.nodegroup[0]: Still creating... [10s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [20s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [30s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [40s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [50s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [1m0s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [1m10s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [1m20s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [1m30s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [1m40s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [1m50s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [2m0s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [2m10s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [2m20s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [2m30s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [2m40s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [2m50s elapsed]
+aws_eks_node_group.nodegroup[0]: Still creating... [3m0s elapsed]
+aws_eks_node_group.nodegroup[0]: Creation complete after 3m8s [id=mycluster:001-group]
+
+Apply complete! Resources: 28 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+endpoint = "https://2ACF0ACF62CACB72DBAEB14220D8E3C9.gr7.ap-southeast-2.eks.amazonaws.com"
+```
+
 ## Configure kubectl
 
 Ref: See [this guide on setting up authentication](https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html).
@@ -102,12 +288,17 @@ users:
 ## Test it works
 
 ```shell
+kubectl cluster-info
 kubectl get nodes -o wide
 kubectl get all --all-namespaces
 ```
 Example:
 
 ```
+$ kubectl cluster-info
+Kubernetes master is running at https://2ACF0ACF62CACB72DBAEB14220D8E3C9.gr7.ap-southeast-2.eks.amazonaws.com
+CoreDNS is running at https://2ACF0ACF62CACB72DBAEB14220D8E3C9.gr7.ap-southeast-2.eks.amazonaws.com/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
 $ kubectl get node -o wide
 NAME                                             STATUS   ROLES    AGE   VERSION              INTERNAL-IP   EXTERNAL-IP   OS-IMAGE         KERNEL-VERSION                CONTAINER-RUNTIME
 ip-10-0-32-204.ap-southeast-2.compute.internal   Ready    <none>   57m   v1.20.4-eks-6b7464   10.0.32.204   <none>        Amazon Linux 2   5.4.129-63.229.amzn2.x86_64   docker://19.3.13
@@ -137,6 +328,140 @@ kube-system   replicaset.apps/coredns-6bfbc5f9f8   2         2         2       5
 
 ```shell
 terraform destroy
+```
+
+Example:
+```
+$ terraform destroy
+
+...
+
+  Enter a value: yes
+
+aws_route_table_association.private[0]: Destroying... [id=rtbassoc-0dd62b87e90670453]
+aws_route_table_association.private[1]: Destroying... [id=rtbassoc-05ec5c6203b948a44]
+aws_route_table_association.public[0]: Destroying... [id=rtbassoc-046f9b5891288e4f4]
+aws_route_table_association.public[1]: Destroying... [id=rtbassoc-0ba32e3e2d8bb18b9]
+aws_eks_node_group.nodegroup[0]: Destroying... [id=mycluster:001-group]
+aws_route_table_association.public[1]: Destruction complete after 4s
+aws_route_table_association.public[0]: Destruction complete after 4s
+aws_route_table_association.private[0]: Destruction complete after 4s
+aws_route_table_association.private[1]: Destruction complete after 4s
+aws_route_table.public: Destroying... [id=rtb-04827e4f49d16a564]
+aws_route_table.private[1]: Destroying... [id=rtb-02e83a764101b153f]
+aws_route_table.private[0]: Destroying... [id=rtb-0c9b1a29a54cd57b8]
+aws_route_table.public: Destruction complete after 5s
+aws_internet_gateway.igw: Destroying... [id=igw-0e7ac330db4105c75]
+aws_route_table.private[1]: Destruction complete after 5s
+aws_route_table.private[0]: Destruction complete after 5s
+aws_nat_gateway.nat[1]: Destroying... [id=nat-0b4f7bc12cbeee77b]
+aws_nat_gateway.nat[0]: Destroying... [id=nat-04d768e678a115e74]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 10s elapsed]
+aws_internet_gateway.igw: Still destroying... [id=igw-0e7ac330db4105c75, 10s elapsed]
+aws_nat_gateway.nat[0]: Still destroying... [id=nat-04d768e678a115e74, 10s elapsed]
+aws_nat_gateway.nat[1]: Still destroying... [id=nat-0b4f7bc12cbeee77b, 10s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 20s elapsed]
+aws_internet_gateway.igw: Still destroying... [id=igw-0e7ac330db4105c75, 20s elapsed]
+aws_nat_gateway.nat[0]: Still destroying... [id=nat-04d768e678a115e74, 20s elapsed]
+aws_nat_gateway.nat[1]: Still destroying... [id=nat-0b4f7bc12cbeee77b, 20s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 30s elapsed]
+aws_internet_gateway.igw: Still destroying... [id=igw-0e7ac330db4105c75, 30s elapsed]
+aws_nat_gateway.nat[1]: Still destroying... [id=nat-0b4f7bc12cbeee77b, 30s elapsed]
+aws_nat_gateway.nat[0]: Still destroying... [id=nat-04d768e678a115e74, 30s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 40s elapsed]
+aws_internet_gateway.igw: Still destroying... [id=igw-0e7ac330db4105c75, 40s elapsed]
+aws_nat_gateway.nat[0]: Still destroying... [id=nat-04d768e678a115e74, 40s elapsed]
+aws_nat_gateway.nat[1]: Still destroying... [id=nat-0b4f7bc12cbeee77b, 40s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 50s elapsed]
+aws_nat_gateway.nat[0]: Destruction complete after 49s
+aws_internet_gateway.igw: Still destroying... [id=igw-0e7ac330db4105c75, 50s elapsed]
+aws_nat_gateway.nat[1]: Still destroying... [id=nat-0b4f7bc12cbeee77b, 50s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 1m0s elapsed]
+aws_internet_gateway.igw: Still destroying... [id=igw-0e7ac330db4105c75, 1m0s elapsed]
+aws_nat_gateway.nat[1]: Destruction complete after 1m0s
+aws_eip.nat[0]: Destroying... [id=eipalloc-0ad5493a3cc2cea37]
+aws_eip.nat[1]: Destroying... [id=eipalloc-01f1150f85c3c4410]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 1m10s elapsed]
+aws_eip.nat[1]: Destruction complete after 4s
+aws_eip.nat[0]: Destruction complete after 4s
+aws_internet_gateway.igw: Still destroying... [id=igw-0e7ac330db4105c75, 1m10s elapsed]
+aws_internet_gateway.igw: Destruction complete after 1m10s
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 1m20s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 1m30s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 1m40s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 1m50s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 2m0s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 2m10s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 2m20s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 2m30s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 2m40s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 2m50s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 3m0s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 3m10s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 3m20s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 3m30s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 3m40s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 3m50s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 4m0s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 4m10s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 4m20s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 4m30s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 4m40s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 4m50s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 5m0s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 5m10s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 5m20s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 5m30s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 5m40s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 5m50s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 6m0s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 6m10s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 6m20s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 6m30s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 6m40s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 6m50s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 7m0s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 7m10s elapsed]
+aws_eks_node_group.nodegroup[0]: Still destroying... [id=mycluster:001-group, 7m20s elapsed]
+aws_eks_node_group.nodegroup[0]: Destruction complete after 7m25s
+aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy: Destroying... [id=mycluster-node-20210802150034507800000003]
+aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly: Destroying... [id=mycluster-node-20210802150034509000000004]
+aws_iam_role_policy.EKSClusterAutoscaler: Destroying... [id=mycluster-node:EKSClusterAutoscaler]
+aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy: Destroying... [id=mycluster-node-20210802150034541500000005]
+aws_iam_role_policy_attachment.AmazonSSMManagedInstanceCore: Destroying... [id=mycluster-node-20210802150034543300000006]
+aws_eks_cluster.cluster: Destroying... [id=mycluster]
+aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy: Destruction complete after 1s
+aws_iam_role_policy.EKSClusterAutoscaler: Destruction complete after 1s
+aws_iam_role_policy_attachment.AmazonSSMManagedInstanceCore: Destruction complete after 1s
+aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly: Destruction complete after 1s
+aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy: Destruction complete after 1s
+aws_iam_role.node: Destroying... [id=mycluster-node]
+aws_iam_role.node: Destruction complete after 2s
+aws_eks_cluster.cluster: Still destroying... [id=mycluster, 10s elapsed]
+aws_eks_cluster.cluster: Still destroying... [id=mycluster, 20s elapsed]
+aws_eks_cluster.cluster: Still destroying... [id=mycluster, 30s elapsed]
+aws_eks_cluster.cluster: Still destroying... [id=mycluster, 40s elapsed]
+aws_eks_cluster.cluster: Still destroying... [id=mycluster, 50s elapsed]
+aws_eks_cluster.cluster: Destruction complete after 1m0s
+aws_iam_role_policy_attachment.AmazonEKSServicePolicy: Destroying... [id=mycluster-cluster-20210802150034505800000002]
+aws_iam_role_policy_attachment.AmazonEKSClusterPolicy: Destroying... [id=mycluster-cluster-20210802150034502200000001]
+aws_subnet.private[0]: Destroying... [id=subnet-069e9af7fd8014abe]
+aws_subnet.public[1]: Destroying... [id=subnet-07b4f82f5cdc33751]
+aws_subnet.private[1]: Destroying... [id=subnet-0126fb9d4cc8ad28b]
+aws_subnet.public[0]: Destroying... [id=subnet-01ee0eae18f927cc3]
+aws_iam_role_policy_attachment.AmazonEKSClusterPolicy: Destruction complete after 0s
+aws_iam_role_policy_attachment.AmazonEKSServicePolicy: Destruction complete after 0s
+aws_iam_role.cluster: Destroying... [id=mycluster-cluster]
+aws_iam_role.cluster: Destruction complete after 2s
+aws_subnet.private[1]: Destruction complete after 3s
+aws_subnet.private[0]: Destruction complete after 3s
+aws_subnet.public[0]: Destruction complete after 3s
+aws_subnet.public[1]: Destruction complete after 3s
+aws_vpc.vpc: Destroying... [id=vpc-04c9ab8f8bb7c22e3]
+aws_vpc.vpc: Destruction complete after 1s
+
+Destroy complete! Resources: 28 destroyed.
+
 ```
 
 ## What now?
