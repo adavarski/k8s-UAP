@@ -37,6 +37,47 @@ In `terraform.tfvars` set the variables you'd like.
 
 `name` and `region` must be defined, everything else is optional.
 
+(Optional): ssh access to worker nodes 
+```
+$ aws ec2 --profile default create-key-pair --key-name demo-aks --query 'KeyMaterial' --output text > demo-aks.pem
+$ git diff
+diff --git a/EKS/main.tf b/EKS/main.tf
+index 0b1d9c1..dfcc90e 100755
+--- a/EKS/main.tf
++++ b/EKS/main.tf
+@@ -129,6 +129,9 @@ resource "aws_eks_node_group" "nodegroup" {
+     min_size     = lookup(var.node_pools[count.index], "min_size", 1)
+     max_size     = lookup(var.node_pools[count.index], "max_size", 2)
+   }
++  remote_access {
++    ec2_ssh_key = var.worker-node-ssh-key
++  }
+   disk_size      = lookup(var.node_pools[count.index], "disk_size", 20)
+   instance_types = [lookup(var.node_pools[count.index], "instance_type", "t3.small")]
+   # Allow external changes to autoscaling desired size without interference from Terraform
+diff --git a/EKS/terraform.tfvars b/EKS/terraform.tfvars
+index e101270..4880e69 100644
+--- a/EKS/terraform.tfvars
++++ b/EKS/terraform.tfvars
+@@ -10,3 +10,4 @@ node_pools = [
+     max_size      = 2
+   }
+ ]
++worker-node-ssh-key = "demo-aks"
+diff --git a/EKS/variables.tf b/EKS/variables.tf
+index 1ec82eb..2d24385 100755
+--- a/EKS/variables.tf
++++ b/EKS/variables.tf
+@@ -61,3 +61,7 @@ List of node pools to use for the cluster.
+ See https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_node_group
+ EOF
+ }
++
++variable "worker-node-ssh-key" {
++  description = "EC2 Keyname to connect to node group"
++}
+```
+
 ## Provisioning
 
 ```shell
