@@ -271,6 +271,14 @@ Outputs:
 
 endpoint = "https://2ACF0ACF62CACB72DBAEB14220D8E3C9.gr7.ap-southeast-2.eks.amazonaws.com"
 ```
+Note: Free Tier error (resource limits)
+
+```
+Error: error waiting for EKS Node Group (mycluster:001-group) to create: unexpected state 'CREATE_FAILED', wanted target 'ACTIVE'. last error: 2 errors occurred:
+	* eks-b2bd9abe-937a-853f-84dc-1532d07149f1: AsgInstanceLaunchFailures: You've reached your quota for maximum Fleet Requests for this account. Launching EC2 instance failed.
+	* DUMMY_553e8105-1d53-431e-a988-d913c5df2416, DUMMY_654d701c-4e09-4f17-a7b4-436723e094d8, DUMMY_6aad6331-8956-499c-b271-eadaec5ff1c7, DUMMY_7c3e02a3-3153-45ae-aebb-39a1a2633603, DUMMY_91dd16eb-d017-4e71-80dc-943085cf696e, DUMMY_f3a2343a-4774-4356-bc97-e8ccb3313c9c: NodeCreationFailure: Instances failed to join the kubernetes cluster
+```
+
 
 ## Configure kubectl
 
