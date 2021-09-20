@@ -486,6 +486,198 @@ namespace "nginx-ingress-sample" deleted
 
 ---------
 ```
+## Monitoring & Logs Aggregation
+```
+1.Monitoring k8s 
+1.1.Prometheus+Graphana operator:
+
+git clone https://github.com/prometheus-operator/kube-prometheus
+cd kube-prometheus
+# Create the namespace and CRDs, and then wait for them to be availble before creating the remaining resources
+kubectl create -f manifests/setup
+until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
+kubectl create -f manifests/
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9093
+$ kubectl --namespace monitoring port-forward svc/grafana 3000
+
+Open http://localhost:3000 on a local workstation, and log in to Grafana with the default administrator credentials, username: admin, password: admin. Explore the prebuilt dashboards for monitoring many aspects of the Kubernetes cluster, including Nodes, Namespaces, and Pods.
+
+
+To teardown the monitoring stack: kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
+
+
+1.2.Prometheus+Grafana via Helm Charts (Working:tested)
+
+Deploy the Metrics Server with the following command:
+
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+# add prometheus Helm repo
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+# add grafana Helm repo
+helm repo add grafana https://grafana.github.io/helm-charts
+kubectl create namespace prometheus
+
+helm install prometheus prometheus-community/prometheus \
+    --namespace prometheus \
+    --set alertmanager.persistentVolume.storageClass="gp2" \
+    --set server.persistentVolume.storageClass="gp2"
+
+kubectl port-forward -n prometheus deploy/prometheus-server 8080:9090
+
+sum(rate(container_cpu_usage_seconds_total{container_name!="POD",namespace!=""}[5m])) by (namespace)
+sum(kube_pod_container_resource_requests_cpu_cores) by (namespace)
+sum(kube_pod_container_resource_limits_cpu_cores) by (namespace)
+
+mkdir ${HOME}/environment/grafana
+
+cat << EoF > ./grafana.yaml
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus-server.prometheus.svc.cluster.local
+      access: proxy
+      isDefault: true
+EoF
+kubectl create namespace grafana
+
+helm install grafana grafana/grafana \
+    --namespace grafana \
+    --set persistence.storageClassName="gp2" \
+    --set persistence.enabled=true \
+    --set adminPassword='Kr0k0dil' \
+    --values ${HOME}/environment/grafana/grafana.yaml \
+    --set service.type=ClusterIP
+
+     export POD_NAME=$(kubectl get pods --namespace grafana -l "app.kubernetes.io/name=grafana,app.kubernetes.io/instance=grafana" -o jsonpath="{.items[0].metadata.name}")
+     kubectl --namespace grafana port-forward $POD_NAME 3000
+
+https://grafana.com/grafana/dashboards/3119 Downloads: 28838
+https://grafana.com/grafana/dashboards/6417 Downloads: 195449
+
+$ kubectl get all -n prometheus
+NAME                                                 READY   STATUS    RESTARTS   AGE
+pod/prometheus-alertmanager-7ff9ffd975-kvcvd         2/2     Running   0          60s
+pod/prometheus-kube-state-metrics-696cf79768-v64xj   1/1     Running   0          60s
+pod/prometheus-node-exporter-hp49q                   1/1     Running   0          60s
+pod/prometheus-node-exporter-x6ngw                   1/1     Running   0          60s
+pod/prometheus-pushgateway-b5d568dcc-5fzsf           1/1     Running   0          60s
+pod/prometheus-server-766649cb7-6ghs4                2/2     Running   0          60s
+
+NAME                                    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/prometheus-alertmanager         ClusterIP   172.20.103.147   <none>        80/TCP     61s
+service/prometheus-kube-state-metrics   ClusterIP   172.20.153.16    <none>        8080/TCP   61s
+service/prometheus-node-exporter        ClusterIP   None             <none>        9100/TCP   61s
+service/prometheus-pushgateway          ClusterIP   172.20.147.100   <none>        9091/TCP   61s
+service/prometheus-server               ClusterIP   172.20.101.43    <none>        80/TCP     61s
+
+NAME                                      DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/prometheus-node-exporter   2         2         2       2            2           <none>          61s
+
+NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/prometheus-alertmanager         1/1     1            1           61s
+deployment.apps/prometheus-kube-state-metrics   1/1     1            1           61s
+deployment.apps/prometheus-pushgateway          1/1     1            1           61s
+deployment.apps/prometheus-server               1/1     1            1           61s
+
+NAME                                                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/prometheus-alertmanager-7ff9ffd975         1         1         1       61s
+replicaset.apps/prometheus-kube-state-metrics-696cf79768   1         1         1       61s
+replicaset.apps/prometheus-pushgateway-b5d568dcc           1         1         1       61s
+replicaset.apps/prometheus-server-766649cb7                1         1         1       61s
+
+
+$ kubectl get all -n grafana
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/grafana-d5bb59bdf-zlzrs   1/1     Running   0          16m
+
+NAME              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+service/grafana   ClusterIP   172.20.61.45   <none>        80/TCP    17m
+
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/grafana   1/1     1            1           16m
+
+NAME                                DESIRED   CURRENT   READY   AGE
+replicaset.apps/grafana-d5bb59bdf   1         1         1       16m
+
+1.3.Datadog 
+1.4.newrelic
+1.5.dynatrace
+
+2.Logs Aggregation (EFK)
+
+///helm delete aws-for-fluent-bit -n logging
+
+kubectl create namespace logging
+helm repo add elastic https://helm.elastic.co
+helm install elasticsearch elastic/elasticsearch --namespace logging
+helm install kibana elastic/kibana --namespace logging
+
+configure fluentbit
+$ kubectl edit configmap aws-for-fluent-bit -n logging
+configmap/aws-for-fluent-bit edited
+
+
+    [OUTPUT]
+        Name            es
+        Match           *
+        Host            elasticsearch-master
+        Port            9200
+        Logstash_Format On
+        Replace_Dots    On
+        Retry_Limit     False
+
+
+Note: redeploy fluentbit pods for new configmap to take place (example: kubectl delete pod/aws-for-fluent-bit-zp8p8 -n logging)
+
+Access ElasticSearch and Kibana UI
+
+$ kubectl -n logging port-forward svc/elasticsearch-master 9200
+$ curl localhost:9200/_cat/indices
+green open .kibana-event-log-7.14.0-000001 qRYe_YnJQpuvFryoEuEWOg 1 1    1    0  11.2kb   5.6kb
+green open .geoip_databases                JSwCTt6-RjKchvK310UJzg 1 1   42    0    82mb    41mb
+green open .kibana_7.14.0_001              kjiAZ9wYTX-t-TJ6zgEUOQ 1 1   30   11   4.3mb   2.1mb
+green open .apm-custom-link                uG3YYtQsRTyaNQBDvKNRLQ 1 1    0    0    416b    208b
+green open .apm-agent-configuration        0HNlSAEQTfiYtGoyL5EI3Q 1 1    0    0    416b    208b
+green open logstash-2021.09.11             9priaCimTiuCzsZ6SKNzdg 1 1  209    0 238.7kb 117.5kb
+green open logstash-2021.09.12             Wl6FERhiRKGZHNC0yIBlVw 1 1 1518    0   678kb 351.6kb
+green open .kibana_task_manager_7.14.0_001 W3BgW75kRlikrVoLEwD9BQ 1 1   14 3831     1mb 521.2kb
+green open logstash-2021.09.13             8LYGMNWKQfKuDtJ9bmthmA 1 1 8452    0   6.3mb   3.1mb
+
+$ kubectl -n logging port-forward deployment/kibana-kibana 5601
+Browser: http://localhost:5601
+
+$ kubectl get all -n logging
+NAME                                READY   STATUS    RESTARTS   AGE
+pod/elasticsearch-master-0          1/1     Running   0          6m13s
+pod/elasticsearch-master-1          1/1     Running   0          6m13s
+pod/elasticsearch-master-2          0/1     Pending   0          6m13s
+pod/kibana-kibana-b4dfc69c7-dbd8g   1/1     Running   0          5m59s
+
+NAME                                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+service/elasticsearch-master            ClusterIP   172.20.22.177   <none>        9200/TCP,9300/TCP   6m13s
+service/elasticsearch-master-headless   ClusterIP   None            <none>        9200/TCP,9300/TCP   6m13s
+service/kibana-kibana                   ClusterIP   172.20.9.140    <none>        5601/TCP            5m59s
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/kibana-kibana   1/1     1            1           5m59s
+
+NAME                                      DESIRED   CURRENT   READY   AGE
+replicaset.apps/kibana-kibana-b4dfc69c7   1         1         1       5m59s
+
+NAME                                    READY   AGE
+statefulset.apps/elasticsearch-master   2/3     6m13s
+
+
+
+```
+
+
 
 ## Tearing down
 
