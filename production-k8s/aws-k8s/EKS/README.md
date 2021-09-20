@@ -612,6 +612,8 @@ replicaset.apps/grafana-d5bb59bdf   1         1         1       16m
 2.Logs Aggregation (EFK)
 
 kubectl create namespace logging
+helm repo add eks https://aws.github.io/eks-charts
+helm install aws-for-fluent-bit --namespace logging eks/aws-for-fluent-bit
 helm repo add elastic https://helm.elastic.co
 helm install elasticsearch elastic/elasticsearch --namespace logging
 helm install kibana elastic/kibana --namespace logging
@@ -652,27 +654,31 @@ Browser: http://localhost:5601
 
 $ kubectl get all -n logging
 NAME                                READY   STATUS    RESTARTS   AGE
-pod/elasticsearch-master-0          1/1     Running   0          6m13s
-pod/elasticsearch-master-1          1/1     Running   0          6m13s
-pod/elasticsearch-master-2          0/1     Pending   0          6m13s
-pod/kibana-kibana-b4dfc69c7-dbd8g   1/1     Running   0          5m59s
+pod/aws-for-fluent-bit-69qch        1/1     Running   0          32h
+pod/aws-for-fluent-bit-jbk7p        1/1     Running   0          32h
+pod/aws-for-fluent-bit-jd829        1/1     Running   0          32h
+pod/aws-for-fluent-bit-p6lck        1/1     Running   0          32h
+pod/elasticsearch-master-0          1/1     Running   0          33h
+pod/elasticsearch-master-1          1/1     Running   0          33h
+pod/elasticsearch-master-2          1/1     Running   0          33h
+pod/kibana-kibana-b4dfc69c7-gr74p   1/1     Running   0          33h
 
-NAME                                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
-service/elasticsearch-master            ClusterIP   172.20.22.177   <none>        9200/TCP,9300/TCP   6m13s
-service/elasticsearch-master-headless   ClusterIP   None            <none>        9200/TCP,9300/TCP   6m13s
-service/kibana-kibana                   ClusterIP   172.20.9.140    <none>        5601/TCP            5m59s
+NAME                                    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)             AGE
+service/elasticsearch-master            ClusterIP   172.20.191.152   <none>        9200/TCP,9300/TCP   33h
+service/elasticsearch-master-headless   ClusterIP   None             <none>        9200/TCP,9300/TCP   33h
+service/kibana-kibana                   ClusterIP   172.20.1.228     <none>        5601/TCP            33h
+
+NAME                                DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+daemonset.apps/aws-for-fluent-bit   4         4         4       4            4           kubernetes.io/os=linux   3d1h
 
 NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/kibana-kibana   1/1     1            1           5m59s
+deployment.apps/kibana-kibana   1/1     1            1           33h
 
 NAME                                      DESIRED   CURRENT   READY   AGE
-replicaset.apps/kibana-kibana-b4dfc69c7   1         1         1       5m59s
+replicaset.apps/kibana-kibana-b4dfc69c7   1         1         1       33h
 
 NAME                                    READY   AGE
-statefulset.apps/elasticsearch-master   2/3     6m13s
-
-
-
+statefulset.apps/elasticsearch-master   3/3     33h
 ```
 
 
