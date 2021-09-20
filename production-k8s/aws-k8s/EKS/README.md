@@ -507,7 +507,7 @@ Open http://localhost:3000 on a local workstation, and log in to Grafana with th
 To teardown the monitoring stack: kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
 
 
-1.2.Prometheus+Grafana via Helm Charts (Working:tested)
+1.2.Prometheus+Grafana via Helm Charts 
 
 Deploy the Metrics Server with the following command:
 
@@ -544,8 +544,8 @@ datasources:
       access: proxy
       isDefault: true
 EoF
-kubectl create namespace grafana
 
+kubectl create namespace grafana
 helm install grafana grafana/grafana \
     --namespace grafana \
     --set persistence.storageClassName="gp2" \
@@ -605,13 +605,11 @@ deployment.apps/grafana   1/1     1            1           16m
 NAME                                DESIRED   CURRENT   READY   AGE
 replicaset.apps/grafana-d5bb59bdf   1         1         1       16m
 
-1.3.Datadog 
+1.3.datadog 
 1.4.newrelic
 1.5.dynatrace
 
 2.Logs Aggregation (EFK)
-
-///helm delete aws-for-fluent-bit -n logging
 
 kubectl create namespace logging
 helm repo add elastic https://helm.elastic.co
