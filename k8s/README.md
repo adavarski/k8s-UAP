@@ -1395,11 +1395,11 @@ https://github.com/phiroict/terraform-aws-kafka-cluster; https://github.com/dwmk
 
 Note4.It's beter to use k8s Operators (ref: https://github.com/adavarski/k8s-operators-playground) than Helm Charts
 ```
-## kubespray + VmWare 
+## kubespray + VMWare 
 
 Ref: https://github.com/adavarski/k8s-vmware-terraform-kubespray
 
-## proxmox + k3s/RKE/kubespray
+## k3s/RKE/kubespray + ProxMox
 
 https://github.com/adavarski/proxmox-terraform-k8s
 
