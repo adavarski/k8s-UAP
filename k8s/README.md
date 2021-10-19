@@ -1395,6 +1395,14 @@ https://github.com/phiroict/terraform-aws-kafka-cluster; https://github.com/dwmk
 
 Note4.It's beter to use k8s Operators (ref: https://github.com/adavarski/k8s-operators-playground) than Helm Charts
 ```
+## kubespray + VmWare 
+
+Ref: https://github.com/adavarski/k8s-vmware-terraform-kubespray
+
+## proxmox + k3s/RKE/kybespray
+
+https://github.com/adavarski/proxmox-terraform-k8s
+
 ## Rancher
 
 Ref1:  https://github.com/adavarski/RKE-rancher-kvm (Rancher2 RKE+ KVM + CentOS)
@@ -1403,8 +1411,9 @@ Ref2:  https://github.com/adavarski/rancher2-vagrant-alpine (Rancher2 RKE + Vagr
 
 ## OpenShift
 
-Ref: https://github.com/adavarski/OpenShift4-CRC-ubuntu
+Ref1: https://github.com/adavarski/OpenShift4-CRC-ubuntu
 
+Ref2: https://github.com/adavarski/ocp4-vmware-terraform-lab
 
 # Playgrounds/Demos
 
