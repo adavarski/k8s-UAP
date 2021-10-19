@@ -1399,7 +1399,7 @@ Note4.It's beter to use k8s Operators (ref: https://github.com/adavarski/k8s-ope
 
 Ref: https://github.com/adavarski/k8s-vmware-terraform-kubespray
 
-## proxmox + k3s/RKE/kybespray
+## proxmox + k3s/RKE/kubespray
 
 https://github.com/adavarski/proxmox-terraform-k8s
 
