@@ -1436,6 +1436,10 @@ Ref1: https://github.com/adavarski/OpenShift4-CRC-ubuntu
 
 Ref2: https://github.com/adavarski/ocp4-vmware-terraform-lab
 
+## Other k8s examples: https://github.com/adavarski/Hetzner-Case-Study : 
+- kubespray/Rancher for k8s PRODUCTION clusters 
+- k3s (for k8s DEVELOPMENT/QA clusters/environments) or kubeadm-based/Rancher-based k8s clusters
+
 # Playgrounds/Demos
 
 ## Demo1: [DataProcessing: Serverless:OpenFaaS+ETL:Apache Nifi](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo1-DataProcessing-Serverless-ETL/)
