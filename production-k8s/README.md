@@ -1,6 +1,6 @@
 
 
-### [KOPS](https://github.com/adavarski/k8s-UAP/tree/main/production-k8s/aws-k8s/KOPS): k8s provisioning on AWS with KOPS (production: default) 
+### [KOPS](https://github.com/adavarski/k8s-UAP/tree/main/production-k8s/aws-k8s/KOPS): provisioning production-ready k8s cluster on AWS using KOPS (production: default) 
 ### [AWS EKS](https://github.com/adavarski/aws-eks-production): provisioning production-ready Amazon EKS clusters using Terraform (production)
 
 ### Managed k8s 
