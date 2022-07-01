@@ -1,5 +1,7 @@
 ## UAP : Universal Analytics Platform (k8s-based)
 
+POC: https://github.com/adavarski/UAP-POC
+
 ### Objectives: k8s-based Data-Driven Analytics/Data Science(ML/DeepML) PaaS/SaaS Platform for Data Analyst/Data Engineer/Data Scientist/DataOps/MLOps playground (R&D/MVP/POC/environmints)
 
 ### Used stacks and products:
