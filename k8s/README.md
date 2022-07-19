@@ -1461,3 +1461,8 @@ Ref2: https://github.com/adavarski/ocp4-vmware-terraform-lab
 ## Demo9: [ML/DeepML with H2O](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo9-H2O-ML)
 
 
+### Example ML platform (logical diagram), based on Open Data Hub (ODH):
+
+<img src="https://github.com/adavarski/k8s-UAP/blob/main/k8s/003-pictures/k8s-ML-platform-logical-architecture.png" width="900">
+
+
