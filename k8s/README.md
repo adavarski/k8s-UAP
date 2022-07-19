@@ -1461,9 +1461,10 @@ Ref2: https://github.com/adavarski/ocp4-vmware-terraform-lab
 ## Demo9: [ML/DeepML with H2O](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo9-H2O-ML)
 
 
-# Example ML platform, based on Open Data Hub (ODH) and OLM (BOOK: Machine Learning on Kubernetes A practical handbook for building and using a complete open source machine learning platform on... (Faisal Masood, Ross Brigoli)
+# Example ML platform, based on Open Data Hub (ODH) and OLM 
+BOOK: Machine Learning on Kubernetes A practical handbook for building and using a complete open source machine learning platform (Faisal Masood, Ross Brigoli)
 
-ML platform (logical diagram):
+ML Platform on k8s (logical diagram):
 
 <img src="https://github.com/adavarski/k8s-UAP/blob/main/k8s/003-pictures/k8s-ML-platform-logical-architecture.png" width="900">
 
@@ -1495,7 +1496,6 @@ spec:
       interval: 60m
 
 $ kubectl create -f ./catalog-source.yaml
-
 $ kubectl get packagemanifests -o wide -n olm | grep -I opendatahub
 
 $ cat odh-subscription.yaml
@@ -1621,7 +1621,7 @@ spec:
         
 Note: replace the KEYCLOAK_HOST string with the keycloak.<THE_IP_ADDRESS_OF_YOUR_MINIKUBE>.nip.io string for example if using minikube. So, if the IP address of your minikube is 192.168.61.72 , thenthe string value would be keycloak.192.168.61.72.nip.io . There are two places in the file where you need to put this new string. We can use k3s or better KIND and laptop IP for this local setup also. 
 
-$ kubectl apply -f ./ keycloak-ingress.yaml --namespace keycloak
+$ kubectl apply -f ./keycloak-ingress.yaml --namespace keycloak
 $ kubectl get ingress --namespace keycloak
 
 ...
