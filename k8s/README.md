@@ -1461,23 +1461,25 @@ Ref2: https://github.com/adavarski/ocp4-vmware-terraform-lab
 ## Demo9: [ML/DeepML with H2O](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo9-H2O-ML)
 
 
-# Example ML platform (logical diagram), based on Open Data Hub (ODH) and OLM:
+# Example ML platform, based on Open Data Hub (ODH) and OLM (BOOK: Machine Learning on Kubernetes A practical handbook for building and using a complete open source machine learning platform on... (Faisal Masood, Ross Brigoli)
+
+ML platform (logical diagram):
 
 <img src="https://github.com/adavarski/k8s-UAP/blob/main/k8s/003-pictures/k8s-ML-platform-logical-architecture.png" width="900">
 
 ```
 ### Run the following command to install the CRD for the OLM:
-kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.19.1/crds.yaml
+$ kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.19.1/crds.yaml
 
 ### Run the following command to install OLM on Kubernetes:
-kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.19.1/olm.yaml
+$ kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.19.1/olm.yaml
 
-watch kubectl get pods -n olm
-kubectl get catalogsource -n olm
+$ watch kubectl get pods -n olm
+$ kubectl get catalogsource -n olm
 
 ### Installing the ODH operator on Kubernetes
 
-cat catalog-source.yaml
+$ cat catalog-source.yaml
 apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
@@ -1491,11 +1493,12 @@ spec:
   updateStrategy:
     registryPoll:
       interval: 60m
-kubectl create -f ./catalog-source.yaml
 
-kubectl get packagemanifests -o wide -n olm | grep -I opendatahub
+$ kubectl create -f ./catalog-source.yaml
 
-cat odh-subscription.yaml
+$ kubectl get packagemanifests -o wide -n olm | grep -I opendatahub
+
+$ cat odh-subscription.yaml
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
@@ -1509,13 +1512,121 @@ spec:
   sourceNamespace: olm
   startingCSV: opendatahub-operator.v1.1.1
 
-kubectl create -f ./odh-subscription.yaml
-kubectl get pods -n operators
+$ kubectl create -f ./odh-subscription.yaml
+$ kubectl get pods -n operators
 
 ### Installing Keycloak on Kubernetes
 
-kubectl create ns keycloak
+$ kubectl create ns keycloak
+
+$ cat keycloak.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak
+  namespace: keycloak
+  labels:
+    app: keycloak
+spec:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: keycloak
+  # type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: keycloak-pvc
+  namespace: keycloak
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+  # storageClassName: standard
+  volumeMode: Filesystem
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  namespace: keycloak
+  labels:
+    app: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+      - name: keycloak
+        image: quay.io/keycloak/keycloak:15.0.2
+        env:
+        - name: KEYCLOAK_USER
+          value: "admin"
+        - name: KEYCLOAK_PASSWORD
+          value: "admin"
+        - name: PROXY_ADDRESS_FORWARDING
+          value: "true"
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
+        readinessProbe:
+          httpGet:
+            path: /auth/realms/master
+            port: 8080
+        volumeMounts:
+        - mountPath: /opt/jboss/keycloak/standalone/data
+          name: storage
+      volumes:
+      - name: storage  
+        persistentVolumeClaim:
+          claimName: keycloak-pvc
+
+$ kubectl allpy -f ./keycloak.yaml --namespace keycloak
+$ kubectl get pods -n keycloak
+
+$ cat keycloak-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keycloak
+  namespace: keycloak
+spec:
+  tls:
+    - hosts:
+      - KEYCLOAK_HOST
+  rules:
+  - host: KEYCLOAK_HOST
+    http:
+      paths:
+      - backend:
+          service:
+            name: keycloak
+            port:
+              number: 8080
+        path: /
+        pathType: ImplementationSpecific
+        
+Note: replace the KEYCLOAK_HOST string with the keycloak.<THE_IP_ADDRESS_OF_YOUR_MINIKUBE>.nip.io string for example if using minikube. So, if the IP address of your minikube is 192.168.61.72 , thenthe string value would be keycloak.192.168.61.72.nip.io . There are two places in the file where you need to put this new string. We can use k3s or better KIND and laptop IP for this local setup also. 
+
+$ kubectl apply -f ./ keycloak-ingress.yaml --namespace keycloak
+$ kubectl get ingress --namespace keycloak
 
 ...
+...
+...
+
 ```
 
