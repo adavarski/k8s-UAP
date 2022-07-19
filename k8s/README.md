@@ -1461,8 +1461,61 @@ Ref2: https://github.com/adavarski/ocp4-vmware-terraform-lab
 ## Demo9: [ML/DeepML with H2O](https://github.com/adavarski/k8s-UAP/tree/main/k8s/Demo9-H2O-ML)
 
 
-# Example ML platform (logical diagram), based on Open Data Hub (ODH):
+# Example ML platform (logical diagram), based on Open Data Hub (ODH) and OLM:
 
 <img src="https://github.com/adavarski/k8s-UAP/blob/main/k8s/003-pictures/k8s-ML-platform-logical-architecture.png" width="900">
 
+```
+### Run the following command to install the CRD for the OLM:
+kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.19.1/crds.yaml
+
+### Run the following command to install OLM on Kubernetes:
+kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.19.1/olm.yaml
+
+watch kubectl get pods -n olm
+kubectl get catalogsource -n olm
+
+### Installing the ODH operator on Kubernetes
+
+cat catalog-source.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: community-operators-redhat
+  namespace: olm
+spec:
+  displayName: Community Operators Red Hat
+  image: registry.access.redhat.com/redhat/community-operator-index:v4.9
+  publisher: RedHat
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 60m
+kubectl create -f ./catalog-source.yaml
+
+kubectl get packagemanifests -o wide -n olm | grep -I opendatahub
+
+cat odh-subscription.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: opendatahub-operator
+  namespace: operators
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: opendatahub-operator
+  source: community-operators-redhat
+  sourceNamespace: olm
+  startingCSV: opendatahub-operator.v1.1.1
+
+kubectl create -f ./odh-subscription.yaml
+kubectl get pods -n operators
+
+### Installing Keycloak on Kubernetes
+
+kubectl create ns keycloak
+
+...
+```
 
