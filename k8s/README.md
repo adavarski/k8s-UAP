@@ -1619,14 +1619,25 @@ spec:
         path: /
         pathType: ImplementationSpecific
         
-Note: replace the KEYCLOAK_HOST string with the keycloak.<THE_IP_ADDRESS_OF_YOUR_MINIKUBE>.nip.io string for example if using minikube. So, if the IP address of your minikube is 192.168.61.72 , thenthe string value would be keycloak.192.168.61.72.nip.io . There are two places in the file where you need to put this new string. We can use k3s or better KIND and laptop IP for this local setup also. 
+Note: replace the KEYCLOAK_HOST string with the keycloak.<THE_IP_ADDRESS_OF_YOUR_MINIKUBE>.nip.io string for example if using minikube. So, if the IP address of your minikube is 192.168.61.72 , thenthe string value would be keycloak.192.168.61.72.nip.io . There are two places in the file where you need to put this new string. We can use KIND and laptop_IP=KEYCLOAK_HOST for this local setup also. 
 
 $ kubectl apply -f ./keycloak-ingress.yaml --namespace keycloak
 $ kubectl get ingress --namespace keycloak
 
-...
-...
-...
+### Importing the Keycloak configuration for the ODH components
 
+### Creating a Keycloak user
+
+### Configuring ODH components
+
+### Installing ODH
+
+kubectl create ns ml-workshop
+kubectl create -f manifests/kfdef/ml-platform.yaml -n ml-workshop
+watch kubectl get pods -n ml-workshop
+...
+...
+...
+https://jupyterhub.IP_ADDRESS.nip.io
 ```
 
